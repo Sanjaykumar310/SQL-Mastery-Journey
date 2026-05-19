@@ -1,0 +1,132 @@
+--Display department numbers where the total salary is greater than 10000.
+SQL> SELECT DEPTNO,SUM(SAL) FROM EMP GROUP BY DEPTNO HAVING SUM(SAL) > 10000;
+
+    DEPTNO   SUM(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        20      10875                                                                                                                                                                                   
+
+SQL> --Show departments having more than 3 employees.
+SQL> SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) > 3;
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+
+SQL> --Display job roles whose average salary is greater than 2500.
+SQL> SELECT JOB,AVG(SAL) FROM EMP GROUP BY JOB HAVING AVG(SAL) > 2500;
+
+JOB         AVG(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+MANAGER   2758.33333                                                                                                                                                                                    
+ANALYST         3000                                                                                                                                                                                    
+
+SQL> --Display job roles whose average salary is greater than 2500.
+SQL> SELECT JOB , MAX(SAL) FROM EMP GROUP BY JOB HAVING MAX(SAL) >4000;
+
+JOB         MAX(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+
+SQL> --Display jobs where the minimum salary is less than 1500.
+SQL> SELECT JOB,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) < 1500;
+
+JOB         MIN(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK            800                                                                                                                                                                                    
+SALESMAN        1250                                                                                                                                                                                    
+
+SQL> --Show department numbers where the average salary is greater than the company average salary.
+SQL> SELECT DEPTNO ,AVG(SAL) FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) > AVG(SAL);
+
+no rows selected
+
+SQL> --Display jobs having more than 2 employees and average salary greater than 2000.
+SQL> SELECT JOB,AVG(SAL) FROM EMP GROUP BY JOB HAVING AVG(SAL) > 2000;
+
+JOB         AVG(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+MANAGER   2758.33333                                                                                                                                                                                    
+ANALYST         3000                                                                                                                                                                                    
+
+SQL> --Show departments where the total commission is greater than 1000.
+SQL> SELECT JOB,SUM(COMM) FROM EMP GROUP BY DEPTNO HAVING SUM(COMM) > 1000;
+SELECT JOB,SUM(COMM) FROM EMP GROUP BY DEPTNO HAVING SUM(COMM) > 1000
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT JOB,SUM(COMM) FROM EMP GROUP BY JOB HAVING SUM(COMM) >1000;
+
+JOB        SUM(COMM)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+SALESMAN        2200                                                                                                                                                                                    
+
+SQL> --Display departments where at least one employee earns more than 4000.
+SQL> SELECT JOB,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) > 4000;
+
+JOB         MIN(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+
+SQL> --Show jobs whose total salary is between 5000 and 15000.
+SQL> SELECT JOB,SUM(SAL) FROM EMP GROUP BY JOB HAVING SUM(SAL) BETWEEN 5000 AND 15000;
+
+JOB         SUM(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+SALESMAN        5600                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+MANAGER         8275                                                                                                                                                                                    
+ANALYST         6000                                                                                                                                                                                    
+
+SQL> --Display departments having exactly 3 employees.
+SQL> SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) >3;
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+
+SQL> --Show jobs where the difference between maximum salary and minimum salary is greater than 2000.
+SQL> SELECT JOB,MAX(SAL),MIN(SAL) FROM EMP GROUP BY JOB HAVING MAX(SAL) > 2000 AND MIN(SAL) >2000;
+
+JOB         MAX(SAL)   MIN(SAL)                                                                                                                                                                         
+--------- ---------- ----------                                                                                                                                                                         
+PRESIDENT       5000       5000                                                                                                                                                                         
+MANAGER         2975       2450                                                                                                                                                                         
+ANALYST         3000       3000                                                                                                                                                                         
+
+SQL> --Display departments whose average salary is the highest among all departments.
+SQL> SELECT JOB,AVG(SAL) FROM EMP GROUP BY JOB HAVING
+  2  
+SQL> --Show departments where the number of employees is less than the average number of employees across departments.
+SQL> SELECT JOB
+  2  
+SQL> --Display jobs having total salary greater than the total salary of department 10.
+SQL> SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10;
+SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10
+                                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> run
+  1* SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10
+SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10
+                                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> run
+  1* SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10
+SELECT JOB,SUM(SAL),DEPTNO FROM EMP GROUP BY JOB HAVING SUM(SAL) > DEPTNO IN 10
+                                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 

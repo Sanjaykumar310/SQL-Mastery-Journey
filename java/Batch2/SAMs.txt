@@ -1,0 +1,13 @@
+spring boot api creation
+start.spring.io site used to create the project file then download and import in inteliji
+postman also download
+basic of file structure and mavan tool it ued to maintain the proper structure 
+@annotation
+@get-used to retrive imformation to user
+@put-used to update the data
+@post-used to by input from user
+@delete-used to delete data
+@patch-used to modify the data similar to @put
+
+
+
