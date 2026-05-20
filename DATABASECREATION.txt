@@ -1,0 +1,110 @@
+--DATA DEFINITION LANGUAGE(DDL)
+SQL> 
+SQL> TABLECREATE COLLEGE (
+SP2-0734: unknown command beginning "TABLECREAT..." - rest of line ignored.
+SQL> CL SCR
+SQL> --DDL (DATA DEFINITION LANGUAGE)
+SQL> 
+SQL> CREATE TABLE COLLEGE (
+  2  ROLLNO NUMBER(3) PRIMARY KEY, NAME VARCHAR(10), PHONENO NUMBER(10) UNIQUE NOT NULL CHECK(LENGTH(PHONENO)=10) , AGE NUMBER(3) NOT NULL);
+
+Table created.
+
+SQL> SELECT * TAB;
+SELECT * TAB
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+COLLEGE                        TABLE                                                                                                                                                                    
+
+SQL> SELECT * FROM COLLEGE;
+
+no rows selected
+
+SQL> RENAME COLLEGE TO STUDENT;
+
+Table renamed.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+STUDENT                        TABLE                                                                                                                                                                    
+
+SQL> RENAME STUDENT TO COLLEGE:
+  2  
+SQL> RENAME STUDENT TO COLLEGE;
+
+Table renamed.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+COLLEGE                        TABLE                                                                                                                                                                    
+
+SQL> ALTER TABLE COLLEGE
+  2  ADD SAL NUMBER(4) ;
+
+Table altered.
+
+SQL> DROP TABLE COLLEGE;
+
+Table dropped.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+BIN$1yyxSz3PSb65n25VIo42tQ==$0 TABLE                                                                                                                                                                    
+
+SQL> FLASHBACK TABLE COLLEGE TO BEFORE DROP;
+
+Flashback complete.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+COLLEGE                        TABLE                                                                                                                                                                    
+
+SQL> --PURGE TABLE NAME ; AFTER THE TABLE DROP COMPLETED MEANS ITS MOVE ON RECYLEBIN THEN PERMANENT DELETE MEANS USE THE PURGE TABLE NAME ; COMMAND
+SQL> 
+SQL> run
+  1* SELECT * FROM TAB
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DEPT                           TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+BONUS                          TABLE                                                                                                                                                                    
+SALGRADE                       TABLE                                                                                                                                                                    
+COLLEGE                        TABLE                                                                                                                                                                    
+
+SQL> 
