@@ -1,0 +1,274 @@
+--Baseline Round
+SQL> --Q1. List all employees with their name, job, and salary.
+SQL> SELECT ENAME,JOB,SAL;
+SELECT ENAME,JOB,SAL
+                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> CL SCR
+SQL> --Baseline Round
+SQL> --Q1. List all employees with their name, job, and salary.
+SQL> SELECT ENAME,JOB,SAL FROM EMP;
+
+ENAME      JOB              SAL                                                                                                                                                                         
+---------- --------- ----------                                                                                                                                                                         
+SMITH      CLERK            800                                                                                                                                                                         
+ALLEN      SALESMAN        1600                                                                                                                                                                         
+WARD       SALESMAN        1250                                                                                                                                                                         
+JONES      MANAGER         2975                                                                                                                                                                         
+MARTIN     SALESMAN        1250                                                                                                                                                                         
+BLAKE      MANAGER         2850                                                                                                                                                                         
+CLARK      MANAGER         2450                                                                                                                                                                         
+SCOTT      ANALYST         3000                                                                                                                                                                         
+KING       PRESIDENT       5000                                                                                                                                                                         
+TURNER     SALESMAN        1500                                                                                                                                                                         
+ADAMS      CLERK           1100                                                                                                                                                                         
+JAMES      CLERK            950                                                                                                                                                                         
+FORD       ANALYST         3000                                                                                                                                                                         
+MILLER     CLERK           1300                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> --Q2. Show all employees in department 30, ordered by salary descending.
+SQL> SELECT * FROM EMP WHERE DETNO = 30 ORDER BY SAL DESC;
+SELECT * FROM EMP WHERE DETNO = 30 ORDER BY SAL DESC
+                        *
+ERROR at line 1:
+ORA-00904: "DETNO": invalid identifier 
+
+
+SQL> CL SCR
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> --Q1. List all employees with their name, job, and salary.
+SQL> SELECT ENAME,JOB,SAL FROM EMP;
+
+ENAME      JOB              SAL                                                                                                                                                                         
+---------- --------- ----------                                                                                                                                                                         
+SMITH      CLERK            800                                                                                                                                                                         
+ALLEN      SALESMAN        1600                                                                                                                                                                         
+WARD       SALESMAN        1250                                                                                                                                                                         
+JONES      MANAGER         2975                                                                                                                                                                         
+MARTIN     SALESMAN        1250                                                                                                                                                                         
+BLAKE      MANAGER         2850                                                                                                                                                                         
+CLARK      MANAGER         2450                                                                                                                                                                         
+SCOTT      ANALYST         3000                                                                                                                                                                         
+KING       PRESIDENT       5000                                                                                                                                                                         
+TURNER     SALESMAN        1500                                                                                                                                                                         
+ADAMS      CLERK           1100                                                                                                                                                                         
+JAMES      CLERK            950                                                                                                                                                                         
+FORD       ANALYST         3000                                                                                                                                                                         
+MILLER     CLERK           1300                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> --Q2. Show all employees in department 30, ordered by salary descending.
+SQL> SELECT * FROM EMP WHERE DEPTNO = 30 AND ORDER BY SAL DESC;
+SELECT * FROM EMP WHERE DEPTNO = 30 AND ORDER BY SAL DESC
+                                        *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM EMP WHERE DEPTNO = 30 ORDER BY SAL DESC;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+
+6 rows selected.
+
+SQL> --Q3. Find employees whose salary is between 1000 and 3000.
+SQL> SELECT * FROM EMP WHERE SAL BETWEEN 1000 AND 3000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+11 rows selected.
+
+SQL> --Q4. List all unique job titles in the company.
+SQL> SELECT DISTINCT(JOB) FROM EMP;
+
+JOB                                                                                                                                                                                                     
+---------                                                                                                                                                                                               
+CLERK                                                                                                                                                                                                   
+SALESMAN                                                                                                                                                                                                
+PRESIDENT                                                                                                                                                                                               
+MANAGER                                                                                                                                                                                                 
+ANALYST                                                                                                                                                                                                 
+
+SQL> --Q5. Show the total salary paid per department.
+SQL> SELECT SUM(SAL),JOB FROM EMP;
+SELECT SUM(SAL),JOB FROM EMP
+                *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT SUM(SAL),JOB FROM EMP GROUP BY JOB;
+
+  SUM(SAL) JOB                                                                                                                                                                                          
+---------- ---------                                                                                                                                                                                    
+      4150 CLERK                                                                                                                                                                                        
+      5600 SALESMAN                                                                                                                                                                                     
+      5000 PRESIDENT                                                                                                                                                                                    
+      8275 MANAGER                                                                                                                                                                                      
+      6000 ANALYST                                                                                                                                                                                      
+
+SQL> --Q6. Find departments where the average salary is greater than 2000.
+SQL> SELECT DEPTNO,AVG(SAL) FROM EMP WHERE AVG(SAL) >2000;
+SELECT DEPTNO,AVG(SAL) FROM EMP WHERE AVG(SAL) >2000
+                                      *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT DEPTNO,AVG(SAL) FROM EMP WHERE SAL > 2000;
+SELECT DEPTNO,AVG(SAL) FROM EMP WHERE SAL > 2000
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT DEPTNO,AVG(SAL) FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) > 2000;
+
+    DEPTNO   AVG(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        20       2175                                                                                                                                                                                   
+        10 2916.66667                                                                                                                                                                                   
+
+SQL> --Q7. List employees who do NOT have a commission (COMM is null).
+SQL> SELECT * FROM EMP WHERE COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+10 rows selected.
+
+SQL> --Q8. Find the name and salary of the employee earning the highest salary in department 20.
+SQL> SELECT ENAME,MAX(SAL) FROM EMP WHERE DEPTNO = 20;
+SELECT ENAME,MAX(SAL) FROM EMP WHERE DEPTNO = 20
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT ENAME,MAX(SAL) FROM EMP GROUP BY MAX(SAL);
+SELECT ENAME,MAX(SAL) FROM EMP GROUP BY MAX(SAL)
+                                        *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT * FROM EMP WHERE SAL = (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = 20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> --Q9. Show each employee's name and their manager's name. (Hint: EMP joins to itself)
+SQL> SELECT ENAME,MGR FROM EMP1 INNER JOIN EMP2 ON EMP1.MGR = EMP2.MGR;
+SELECT ENAME,MGR FROM EMP1 INNER JOIN EMP2 ON EMP1.MGR = EMP2.MGR
+                                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT ENAME,MGR FROM EMP1 JOIN EMP2 ON EMP1.MGR = EMP2.MGR;
+SELECT ENAME,MGR FROM EMP1 JOIN EMP2 ON EMP1.MGR = EMP2.MGR
+                                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT ENAME ,MGR,EMPNO FROM EMP1 JOIN EMP2 ON EMP1.MGR= EMP2.EMPNO;
+SELECT ENAME ,MGR,EMPNO FROM EMP1 JOIN EMP2 ON EMP1.MGR= EMP2.EMPNO
+                                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT ENAME,MGR,EMPNO FROM EMP1 JOIN EMP2 ON EMP1.EMPNO = EMP2.MGR;
+SELECT ENAME,MGR,EMPNO FROM EMP1 JOIN EMP2 ON EMP1.EMPNO = EMP2.MGR
+                                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> --Q10. List all employees whose salary is greater than the average salary of the entire company.
+SQL> SELECT * FROM EMP WHERE SAL >(SELECT AVG(SAL) FROM EMP);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> run
+  1* SELECT * FROM EMP WHERE SAL >(SELECT AVG(SAL) FROM EMP)
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+6 rows selected.
+
+SQL> 
