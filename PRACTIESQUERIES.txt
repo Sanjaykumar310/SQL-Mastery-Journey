@@ -1,0 +1,51 @@
+--R1. Show each job title and its average salary, only for jobs where average salary is above 2500.
+SQL> SELECT JOB,AVG(SAL) FROM EMP WHERE SAL > 2500;
+SELECT JOB,AVG(SAL) FROM EMP WHERE SAL > 2500
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT JOB,AVG(SAL) FROM EMP GROUP BY JOB HAVING AVG(SAL) > 2500;
+
+JOB         AVG(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+MANAGER   2758.33333                                                                                                                                                                                    
+ANALYST         3000                                                                                                                                                                                    
+
+SQL> --R2. Find departments where the minimum salary is greater than 1000.
+SQL> SELECT DEPTNO ,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) > 1000;
+SELECT DEPTNO ,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) > 1000
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPTNO ,MIN(SAL) FROM EMP GROUP BY DEPTNO HAVING MIN(SAL) > 1000;
+
+    DEPTNO   MIN(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        10       1300                                                                                                                                                                                   
+
+SQL> --R3. Show job titles that have more than 1 employee, along with the count.
+SQL> SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) > 1;
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+MANAGER            3                                                                                                                                                                                    
+ANALYST            2                                                                                                                                                                                    
+
+SQL> run
+  1* SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) > 1
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+MANAGER            3                                                                                                                                                                                    
+ANALYST            2                                                                                                                                                                                    
+
+SQL> 
