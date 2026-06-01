@@ -1,0 +1,93 @@
+--GROUP BY & HAVING Revision
+SQL> cl scr
+SQL> --GROUP BY & HAVING Revision
+SQL> --Q1. List each department number and the total salary paid in that department. Only show departments where total salary exceeds 5000.
+SQL> 
+SQL> SELECT DEPTNO,SUM(SAL) FROM EMP WHERE SUM(SAL) > 5000;
+SELECT DEPTNO,SUM(SAL) FROM EMP WHERE SUM(SAL) > 5000
+                                      *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT DEPTNO,SUM(SAL) FROM EMP GROUP BY DEPTNO HAVING SUM(SAL) > 5000;
+
+    DEPTNO   SUM(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        30       9400                                                                                                                                                                                   
+        20      10875                                                                                                                                                                                   
+        10       8750                                                                                                                                                                                   
+
+SQL> --Q2. Find the number of employees in each job. Only show jobs that have more than 1 employee.
+SQL> SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) > 1;
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+MANAGER            3                                                                                                                                                                                    
+ANALYST            2                                                                                                                                                                                    
+
+SQL> --Q3. Show each department's minimum salary. Only include departments where the minimum salary is less than 1000.
+SQL> SELECT MIN(SAL) ,DEPTNO FROM EMP GROUP BY DEPTNO HAVING MIN(SAL) < 1000;
+
+  MIN(SAL)     DEPTNO                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+       950         30                                                                                                                                                                                   
+       800         20                                                                                                                                                                                   
+
+SQL> --Q4. Find all departments where the average salary is between 2000 and 3000 (inclusive).
+SQL> SELECT DEPTNO ,AVG(SAL) FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) BETWEEN 2000 AND 3000;
+
+    DEPTNO   AVG(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        20       2175                                                                                                                                                                                   
+        10 2916.66667                                                                                                                                                                                   
+
+SQL> --Q5. List each job and the maximum salary for that job. Sort the result by maximum salary descending.
+SQL> SELECT JOB,MAX(SAL) FROM EMP GROUP BY JOB HAVING MAX(SAL) ORDER BY DESC;
+SELECT JOB,MAX(SAL) FROM EMP GROUP BY JOB HAVING MAX(SAL) ORDER BY DESC
+                                                          *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT JOB,MAX(SAL) FROM EMP GROUP BY JOB ORDER BY MAX(SAL) DESC;
+
+JOB         MAX(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+PRESIDENT       5000                                                                                                                                                                                    
+ANALYST         3000                                                                                                                                                                                    
+MANAGER         2975                                                                                                                                                                                    
+SALESMAN        1600                                                                                                                                                                                    
+CLERK           1300                                                                                                                                                                                    
+
+SQL> --Q6. Find the names of employees who earn more than the average salary of the entire company.
+SQL> SELECT ENAME ,SAL FROM EMP WHERE SAL > (SELECT AVG(SAL) FROM EMP );
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+JONES            2975                                                                                                                                                                                   
+BLAKE            2850                                                                                                                                                                                   
+CLARK            2450                                                                                                                                                                                   
+SCOTT            3000                                                                                                                                                                                   
+KING             5000                                                                                                                                                                                   
+FORD             3000                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> run
+  1* SELECT ENAME ,SAL FROM EMP WHERE SAL > (SELECT AVG(SAL) FROM EMP )
+
+ENAME             SAL                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+JONES            2975                                                                                                                                                                                   
+BLAKE            2850                                                                                                                                                                                   
+CLARK            2450                                                                                                                                                                                   
+SCOTT            3000                                                                                                                                                                                   
+KING             5000                                                                                                                                                                                   
+FORD             3000                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> 
