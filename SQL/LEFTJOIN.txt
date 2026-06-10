@@ -1,0 +1,208 @@
+SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> --LEFT JOIN--
+SQL> 
+SQL> --SYNTAX SELECT e.emp_name, d.dept_name
+SQL> FROM Employee e
+SP2-0734: unknown command beginning "FROM Emplo..." - rest of line ignored.
+SQL> LEFT JOIN Department d
+SP2-0734: unknown command beginning "LEFT JOIN ..." - rest of line ignored.
+SQL> ON e.dept_id = d.dept_id;--
+> 
+SP2-0734: unknown command beginning "ON e.dept_..." - rest of line ignored.
+SQL> CL SCR
+SQL> --LEFT JOIN
+SQL> 
+SQL> --Display all employees, even if they are not assigned to any department.
+SQL> 
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                                                                                                                                           
+---------- -------------- -------------                                                                                                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                                                                                                      
+        20 RESEARCH       DALLAS                                                                                                                                                                        
+        30 SALES          CHICAGO                                                                                                                                                                       
+        40 OPERATIONS     BOSTON                                                                                                                                                                        
+
+SQL> SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=D.DEPTNO;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO     DEPTNO DNAME          LOC                                                                                     
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------- -------------- -------------                                                                           
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20         20 RESEARCH       DALLAS                                                                                  
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30         30 SALES          CHICAGO                                                                                 
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30         30 SALES          CHICAGO                                                                                 
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20         20 RESEARCH       DALLAS                                                                                  
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30         30 SALES          CHICAGO                                                                                 
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30         30 SALES          CHICAGO                                                                                 
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10         10 ACCOUNTING     NEW YORK                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20         20 RESEARCH       DALLAS                                                                                  
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         10 ACCOUNTING     NEW YORK                                                                                
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30         30 SALES          CHICAGO                                                                                 
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20         20 RESEARCH       DALLAS                                                                                  
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30         30 SALES          CHICAGO                                                                                 
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20         20 RESEARCH       DALLAS                                                                                  
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10         10 ACCOUNTING     NEW YORK                                                                                
+
+14 rows selected.
+
+SQL> --Find employees without a department.
+SQL> SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=D.DEPTNO WHERE DEPTNO = NULL;
+SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=D.DEPTNO WHERE DEPTNO = NULL
+                                                                *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SELECT * FROM EMP E LEFT JOIN DEPTNO D ON E.DEPTNO=D.DEPTNO WHERE DEPTNO IS NULL;
+SELECT * FROM EMP E LEFT JOIN DEPTNO D ON E.DEPTNO=D.DEPTNO WHERE DEPTNO IS NULL
+                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=E.DEPTNO WHERE DEPTNO IS NULL;
+SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=E.DEPTNO WHERE DEPTNO IS NULL
+                                                                *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=E.DEPTNO WHERE MGR IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO     DEPTNO DNAME          LOC                                                                                     
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------- -------------- -------------                                                                           
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         10 ACCOUNTING     NEW YORK                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         20 RESEARCH       DALLAS                                                                                  
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         30 SALES          CHICAGO                                                                                 
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         40 OPERATIONS     BOSTON                                                                                  
+
+SQL> --Show all employees and their department details.
+SQL> SELECT * FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO=D.DEPTNO;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO     DEPTNO DNAME          LOC                                                                                     
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ---------- -------------- -------------                                                                           
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20         20 RESEARCH       DALLAS                                                                                  
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30         30 SALES          CHICAGO                                                                                 
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30         30 SALES          CHICAGO                                                                                 
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20         20 RESEARCH       DALLAS                                                                                  
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30         30 SALES          CHICAGO                                                                                 
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30         30 SALES          CHICAGO                                                                                 
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10         10 ACCOUNTING     NEW YORK                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20         20 RESEARCH       DALLAS                                                                                  
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         10 ACCOUNTING     NEW YORK                                                                                
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30         30 SALES          CHICAGO                                                                                 
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20         20 RESEARCH       DALLAS                                                                                  
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30         30 SALES          CHICAGO                                                                                 
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20         20 RESEARCH       DALLAS                                                                                  
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10         10 ACCOUNTING     NEW YORK                                                                                
+
+14 rows selected.
+
+SQL> --Count employees in each department, including departments with no employees.
+SQL> 
+SQL> --Q1. Display each employee's name, job, and their department name.
+SQL> SELECT E.ENAME,E.JOB,D.DNAME FROM EMP E INNER JOIN DEPT D ON E.DEPTNO=D.DEPTNO;
+
+ENAME      JOB       DNAME                                                                                                                                                                              
+---------- --------- --------------                                                                                                                                                                     
+SMITH      CLERK     RESEARCH                                                                                                                                                                           
+ALLEN      SALESMAN  SALES                                                                                                                                                                              
+WARD       SALESMAN  SALES                                                                                                                                                                              
+JONES      MANAGER   RESEARCH                                                                                                                                                                           
+MARTIN     SALESMAN  SALES                                                                                                                                                                              
+BLAKE      MANAGER   SALES                                                                                                                                                                              
+CLARK      MANAGER   ACCOUNTING                                                                                                                                                                         
+SCOTT      ANALYST   RESEARCH                                                                                                                                                                           
+KING       PRESIDENT ACCOUNTING                                                                                                                                                                         
+TURNER     SALESMAN  SALES                                                                                                                                                                              
+ADAMS      CLERK     RESEARCH                                                                                                                                                                           
+JAMES      CLERK     SALES                                                                                                                                                                              
+FORD       ANALYST   RESEARCH                                                                                                                                                                           
+MILLER     CLERK     ACCOUNTING                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> --Q2. Display employee name, salary, and the city (LOC) they work in. Show only employees in DALLAS or CHICAGO.
+SQL> 
+SQL> SELECT E.ENAME,E.SAL,D.LOC FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPNO WHERE LOC IN ('CHICAGO','DALLAS');
+SELECT E.ENAME,E.SAL,D.LOC FROM EMP E INNER JOIN DEPT D ON E.DEPTNO = D.DEPNO WHERE LOC IN ('CHICAGO','DALLAS')
+                                                                      *
+ERROR at line 1:
+ORA-00904: "D"."DEPNO": invalid identifier 
+
+
+SQL> SELECT E.ENAME,E.SAL,D.LOC FROM EMP E INNER JOIN DEPT D ON E.DEPTNO= D.DEPTNO WHERE LOC IN ('CHICAGO','DALLAS');
+
+ENAME             SAL LOC                                                                                                                                                                               
+---------- ---------- -------------                                                                                                                                                                     
+SMITH             800 DALLAS                                                                                                                                                                            
+ALLEN            1600 CHICAGO                                                                                                                                                                           
+WARD             1250 CHICAGO                                                                                                                                                                           
+JONES            2975 DALLAS                                                                                                                                                                            
+MARTIN           1250 CHICAGO                                                                                                                                                                           
+BLAKE            2850 CHICAGO                                                                                                                                                                           
+SCOTT            3000 DALLAS                                                                                                                                                                            
+TURNER           1500 CHICAGO                                                                                                                                                                           
+ADAMS            1100 DALLAS                                                                                                                                                                            
+JAMES             950 CHICAGO                                                                                                                                                                           
+FORD             3000 DALLAS                                                                                                                                                                            
+
+11 rows selected.
+
+SQL> --Q3. Display employee name, department name, and salary grade (from SALGRADE). (Hint: use BETWEEN LOSAL AND HISAL)
+SQL> SELECT E.ENAME,D.DNAME FROM EMP E INNER JOIN DEPT D SALGRADE S ON E.DEPTNO = D.DEPTNO WHERE LOSAL AND HISAL;
+SELECT E.ENAME,D.DNAME FROM EMP E INNER JOIN DEPT D SALGRADE S ON E.DEPTNO = D.DEPTNO WHERE LOSAL AND HISAL
+                                                    *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> run
+  1* SELECT E.ENAME,D.DNAME FROM EMP E INNER JOIN DEPT D SALGRADE S ON E.DEPTNO = D.DEPTNO WHERE LOSAL AND HISAL
+SELECT E.ENAME,D.DNAME FROM EMP E INNER JOIN DEPT D SALGRADE S ON E.DEPTNO = D.DEPTNO WHERE LOSAL AND HISAL
+                                                    *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> 

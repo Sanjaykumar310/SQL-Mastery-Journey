@@ -1,0 +1,121 @@
+SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> --Q7. Find departments where the average salary is greater than 2000.
+SQL> SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING SAL > 2000;
+SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING SAL > 2000
+                                                                         *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) > 2000;
+
+    DEPTNO AVERAGESALARY                                                                                                                                                                                
+---------- -------------                                                                                                                                                                                
+        20          2175                                                                                                                                                                                
+        10    2916.66667                                                                                                                                                                                
+
+SQL> --Q8. Find job titles that have more than 2 employees.
+SQL> SELECT JOB FROM EMP GROUP BY JOB HAVING JOB > 2;
+SELECT JOB FROM EMP GROUP BY JOB HAVING JOB > 2
+                                        *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT JOB,ENAME FROM EMP GROUP BY JOB HAVING ENAME > 2;
+SELECT JOB,ENAME FROM EMP GROUP BY JOB HAVING ENAME > 2
+                                              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT JOB,COUNT(*) FROM EMP GROUP BY JOB HAVING COUNT(*) > 2;
+
+JOB         COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+CLERK              4                                                                                                                                                                                    
+SALESMAN           4                                                                                                                                                                                    
+MANAGER            3                                                                                                                                                                                    
+
+SQL> --Q9. Find departments where the total salary bill exceeds 8000.
+SQL> SELECT JOB,SUM(SAL) FROM EMP GROUP BY JOB HAVING SUM(SAL) > 8000;
+
+JOB         SUM(SAL)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+MANAGER         8275                                                                                                                                                                                    
+
+SQL> --Q10. Find departments where the minimum salary is below 1000.
+SQL> SELECT DEPTNO ,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) <1000;
+SELECT DEPTNO ,MIN(SAL) FROM EMP GROUP BY JOB HAVING MIN(SAL) <1000
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPTNO,MIN(SAL) FROM EMP GROUP BY DEPTNO HAVING MIN(SAL) < 1000;
+
+    DEPTNO   MIN(SAL)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        30        950                                                                                                                                                                                   
+        20        800                                                                                                                                                                                   
+
+SQL> --Q11. Find job titles where the maximum salary is between 2000 and 4000.
+SQL> SELECT JOB,MAX(SAL) AS MAXIMIUMSALARY FROM EMP GROUP BY JOB HAVING BETWEEN MAX(SAL) 2000 AND 400;
+SELECT JOB,MAX(SAL) AS MAXIMIUMSALARY FROM EMP GROUP BY JOB HAVING BETWEEN MAX(SAL) 2000 AND 400
+                                                                   *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT JOB,MAX(SAL) AS MAXIMUMSALARY FROM EMP GROUP BY JOB HAVING MAX(SAL) BETWEEN 2000 AND 4000;
+
+JOB       MAXIMUMSALARY                                                                                                                                                                                 
+--------- -------------                                                                                                                                                                                 
+MANAGER            2975                                                                                                                                                                                 
+ANALYST            3000                                                                                                                                                                                 
+
+SQL> --Q12. Find departments that have exactly 3 employees.
+SQL> SELECT DEPTNO ,COUNT(*) FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 3;
+
+    DEPTNO   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        30          6                                                                                                                                                                                   
+        20          5                                                                                                                                                                                   
+
+SQL> --Q13. Find departments where average salary is greater than the overall average salary of the company.
+SQL> SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) ;
+SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) 
+                                                                                 *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> run
+  1* SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) 
+SELECT DEPTNO ,AVG(SAL) AS AVERAGESALARY FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) 
+                                                                                 *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> 
