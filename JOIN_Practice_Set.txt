@@ -1,0 +1,221 @@
+SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                                                                                                                                           
+---------- -------------- -------------                                                                                                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                                                                                                      
+        20 RESEARCH       DALLAS                                                                                                                                                                        
+        30 SALES          CHICAGO                                                                                                                                                                       
+        40 OPERATIONS     BOSTON                                                                                                                                                                        
+
+SQL> SELECT * FROM SALGRADE;
+
+     GRADE      LOSAL      HISAL                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1        700       1200                                                                                                                                                                        
+         2       1201       1400                                                                                                                                                                        
+         3       1401       2000                                                                                                                                                                        
+         4       2001       3000                                                                                                                                                                        
+         5       3001       9999                                                                                                                                                                        
+
+SQL> --List employee name, job, and department name for all employees.
+SQL> SELECT E.ENAME,E.JOB,D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;
+
+ENAME      JOB       DNAME                                                                                                                                                                              
+---------- --------- --------------                                                                                                                                                                     
+SMITH      CLERK     RESEARCH                                                                                                                                                                           
+ALLEN      SALESMAN  SALES                                                                                                                                                                              
+WARD       SALESMAN  SALES                                                                                                                                                                              
+JONES      MANAGER   RESEARCH                                                                                                                                                                           
+MARTIN     SALESMAN  SALES                                                                                                                                                                              
+BLAKE      MANAGER   SALES                                                                                                                                                                              
+CLARK      MANAGER   ACCOUNTING                                                                                                                                                                         
+SCOTT      ANALYST   RESEARCH                                                                                                                                                                           
+KING       PRESIDENT ACCOUNTING                                                                                                                                                                         
+TURNER     SALESMAN  SALES                                                                                                                                                                              
+ADAMS      CLERK     RESEARCH                                                                                                                                                                           
+JAMES      CLERK     SALES                                                                                                                                                                              
+FORD       ANALYST   RESEARCH                                                                                                                                                                           
+MILLER     CLERK     ACCOUNTING                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> --List employee name and department name for employees working in DALLAS.
+SQL> SELECT E.ENAME,D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE LOC = 'DALLAS';
+
+ENAME      DNAME                                                                                                                                                                                        
+---------- --------------                                                                                                                                                                               
+SMITH      RESEARCH                                                                                                                                                                                     
+JONES      RESEARCH                                                                                                                                                                                     
+SCOTT      RESEARCH                                                                                                                                                                                     
+ADAMS      RESEARCH                                                                                                                                                                                     
+FORD       RESEARCH                                                                                                                                                                                     
+
+SQL> --List employee name, salary, and salary grade for every employee.
+SQL> SELECT E.ENAME,E.SAL,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON SED
+  2  
+SQL> 
+SQL> SELECT E.ENAME,E.SAL,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+ENAME             SAL      GRADE                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+SMITH             800          1                                                                                                                                                                        
+JAMES             950          1                                                                                                                                                                        
+ADAMS            1100          1                                                                                                                                                                        
+WARD             1250          2                                                                                                                                                                        
+MARTIN           1250          2                                                                                                                                                                        
+MILLER           1300          2                                                                                                                                                                        
+TURNER           1500          3                                                                                                                                                                        
+ALLEN            1600          3                                                                                                                                                                        
+CLARK            2450          4                                                                                                                                                                        
+BLAKE            2850          4                                                                                                                                                                        
+JONES            2975          4                                                                                                                                                                        
+SCOTT            3000          4                                                                                                                                                                        
+FORD             3000          4                                                                                                                                                                        
+KING             5000          5                                                                                                                                                                        
+
+14 rows selected.
+
+SQL> --List the names of employees who work in the same department as 'BLAKE'.
+SQL> SELECT E.ENAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.ENAME = 'BLAKE';
+
+ENAME                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+BLAKE                                                                                                                                                                                                   
+
+SQL> SELECT E.ENAME,D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.ENAME = 'BLAKE';
+
+ENAME      DNAME                                                                                                                                                                                        
+---------- --------------                                                                                                                                                                               
+BLAKE      SALES                                                                                                                                                                                        
+
+SQL> --List employee name and their manager's name.
+SQL> SELECT E.ENAME,M.ENAME AS MANAGER FROM EMP E INNER JOIN EMP M ON E.EMPNO = M.MGR ;
+
+ENAME      MANAGER                                                                                                                                                                                      
+---------- ----------                                                                                                                                                                                   
+FORD       SMITH                                                                                                                                                                                        
+BLAKE      ALLEN                                                                                                                                                                                        
+BLAKE      WARD                                                                                                                                                                                         
+KING       JONES                                                                                                                                                                                        
+BLAKE      MARTIN                                                                                                                                                                                       
+KING       BLAKE                                                                                                                                                                                        
+KING       CLARK                                                                                                                                                                                        
+JONES      SCOTT                                                                                                                                                                                        
+BLAKE      TURNER                                                                                                                                                                                       
+SCOTT      ADAMS                                                                                                                                                                                        
+BLAKE      JAMES                                                                                                                                                                                        
+JONES      FORD                                                                                                                                                                                         
+CLARK      MILLER                                                                                                                                                                                       
+
+13 rows selected.
+
+SQL> --List department name and the number of employees in each department, including departments with zero employees.
+SQL> SELECT D.DNAME,E.JOB ,COUNT(*) FROM EMP E JOIN DEPT D ON E.DEPTNO= D.DEPTNO;
+SELECT D.DNAME,E.JOB ,COUNT(*) FROM EMP E JOIN DEPT D ON E.DEPTNO= D.DEPTNO
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D.DNAME,COUNT(E.JOB) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;
+SELECT D.DNAME,COUNT(E.JOB) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> --10 List employee name, job, department name, and location for employees who work as 'CLERK'.
+SQL> SELECT E.ENAME,E.JOB,D.DNAME,D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE JOB = 'CLERK';
+
+ENAME      JOB       DNAME          LOC                                                                                                                                                                 
+---------- --------- -------------- -------------                                                                                                                                                       
+SMITH      CLERK     RESEARCH       DALLAS                                                                                                                                                              
+ADAMS      CLERK     RESEARCH       DALLAS                                                                                                                                                              
+JAMES      CLERK     SALES          CHICAGO                                                                                                                                                             
+MILLER     CLERK     ACCOUNTING     NEW YORK                                                                                                                                                            
+
+SQL> --Find the names of employees who earn more than the average salary of their own department. (use a join with a subquery/inline view)
+SQL> SELECT
+  2  
+SQL> --13.List employee name, department name, and salary grade, ordered by salary grade descending and then by salary descending.
+SQL> SELECT E.ENAME,D.DNAME,S.GRADE ,E.SAL FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL
+  2  
+SQL> SELECT E.ENAME,D.DNAME,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ONE.SAL BETWEEN S.HISAL AND S.LOSAL ORDER BY S.GRADE DESC,E.SAL DESC;
+SELECT E.ENAME,D.DNAME,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ONE.SAL BETWEEN S.HISAL AND S.LOSAL ORDER BY S.GRADE DESC,E.SAL DESC
+                                                                                             *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> SELECT E.ENAME,D.NAME,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL;
+SELECT E.ENAME,D.NAME,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL
+               *
+ERROR at line 1:
+ORA-00904: "D"."NAME": invalid identifier 
+
+
+SQL> SELECT E.ENAME,D.DNAME,S.GRADE FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL ORDER BY S.GRADE DESC ,E.SAL DESC;
+
+ENAME      DNAME               GRADE                                                                                                                                                                    
+---------- -------------- ----------                                                                                                                                                                    
+KING       ACCOUNTING              5                                                                                                                                                                    
+FORD       RESEARCH                4                                                                                                                                                                    
+SCOTT      RESEARCH                4                                                                                                                                                                    
+JONES      RESEARCH                4                                                                                                                                                                    
+BLAKE      SALES                   4                                                                                                                                                                    
+CLARK      ACCOUNTING              4                                                                                                                                                                    
+ALLEN      SALES                   3                                                                                                                                                                    
+TURNER     SALES                   3                                                                                                                                                                    
+MILLER     ACCOUNTING              2                                                                                                                                                                    
+MARTIN     SALES                   2                                                                                                                                                                    
+WARD       SALES                   2                                                                                                                                                                    
+ADAMS      RESEARCH                1                                                                                                                                                                    
+JAMES      SALES                   1                                                                                                                                                                    
+SMITH      RESEARCH                1                                                                                                                                                                    
+
+14 rows selected.
+
+SQL> --14.List department name, location, and total salary expense per department — only for departments whose total salary exceeds 8000.
+SQL> SELECT D.DNAME,D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE SUM(SAL) > 8000;
+SELECT D.DNAME,D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE SUM(SAL) > 8000
+                                                                                    *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT D.DNAME.D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE SUM(E.SAL) > 8000;
+SELECT D.DNAME.D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE SUM(E.SAL) > 8000
+                                                                                    *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT D.DNAME.D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 8000;
+SELECT D.DNAME.D.LOC,SUM(E.SAL) FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 8000
+       *
+ERROR at line 1:
+ORA-00904: "D"."DNAME"."D"."LOC": invalid identifier 
+
+
+SQL> 
